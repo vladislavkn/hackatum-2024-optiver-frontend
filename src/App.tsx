@@ -1,5 +1,9 @@
+import ChessGame from "./components/ChessGame";
+import SuggestedGamesBoard from "./components/SuggestedGamesBoard";
+import SuggestedGamesPage from "./pages/SuggestedGamesPage";
+
 function App() {
-  return <h1>I ENJOY SOLANA AND OPTIVER</h1>;
+  return <SuggestedGamesPage />;
 }
 
 export default App;
