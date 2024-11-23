@@ -1,6 +1,8 @@
 import BetChart from "@/components/BetChart";
 import ChessGame from "@/components/ChessGame";
 import Nav from "@/components/Nav";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import WatchersList from "@/components/WatchersList";
 import useStore from "@/lib/store";
 import { FC } from "react";
@@ -24,14 +26,26 @@ const GamePage: FC = () => {
             <ChessGame onGameOver={alert} />
           </div>
           <div>
-            <div className="flex mb-8 gap-8">
+            <div className="grid mb-8 gap-8 grid-cols-3 sm:grid-cols-2 md:grid-cols-3">
               <div>
                 <p className="text-sm">Players bet amount</p>
-                <p className="text-xl font-bold">0.{bet} SOL</p>
+                <p className="text-xl font-bold">{bet} SOL</p>
+              </div>
+              <div>
+                <p className="text-sm">Your bet amount</p>
+                <p className="text-xl font-bold">{Number(bet!) / 2} SOL</p>
               </div>
               <div>
                 <p className="text-sm">Watchers bet amount</p>
                 <p className="text-xl font-bold">1,54 SOL</p>
+              </div>
+              <div className="col-span-3 sm:col-span-2 md:col-span-3 flex rounded-lg">
+                <Input
+                  placeholder="Enter your bet"
+                  type="number"
+                  className="mr-2"
+                />
+                <Button>Rise your bet</Button>
               </div>
             </div>
             <BetChart />

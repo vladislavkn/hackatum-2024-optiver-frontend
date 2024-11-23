@@ -41,7 +41,9 @@ const SuggestedGamesPage: FC = () => {
   });
 
   const handleGameClick = (game: SuggestedGame) => {
-    navigate(`/userspace/game?competitor=${game.name}&bet=${game.betAmount}`);
+    navigate(
+      `/userspace/game?competitor=${game.name}&bet=${game.betAmount / 100}`
+    );
   };
 
   const handleAddSuggestedGame = (e: FormEvent) => {
