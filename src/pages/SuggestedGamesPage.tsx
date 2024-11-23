@@ -1,31 +1,58 @@
 import Nav from "@/components/Nav";
 import SuggestedGamesBoard from "@/components/SuggestedGamesBoard";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import getSuggestedGame from "@/lib/api";
+import { SuggestedGame } from "@/types";
+import { FC, FormEvent, useEffect, useState } from "react";
 
-import { FC } from "react";
+const initialState = Array.from({ length: 15 }, () => getSuggestedGame());
 
 const SuggestedGamesPage: FC = () => {
+  const [suggestedGames, setSuggestedGames] =
+    useState<SuggestedGame[]>(initialState);
+  useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout>;
+    const updateGames = () => {
+      setSuggestedGames((currState) => {
+        const randomIndex = Math.floor(Math.random() * currState.length);
+        if (currState.length > 30) {
+          currState.splice(randomIndex, 1);
+        } else {
+          currState.splice(randomIndex, 0, getSuggestedGame());
+        }
+
+        return [...currState];
+      });
+      timeout = setTimeout(updateGames, Math.floor(Math.random() * 5000));
+    };
+    timeout = setTimeout(updateGames, Math.floor(Math.random() * 5000));
+    return () => clearTimeout(timeout);
+  });
+
+  const handleAddSuggestedGame = (e: FormEvent) => {
+    e.preventDefault();
+    // (e.target as HTMLFormElement)
+  };
+
   return (
     <div>
       <Nav />
-
-      <main className="max-w-6xl mx-auto py-8 px-4">
-        <div className="flex w-full sm:w-auto">
-          <label className="bg-zinc-100 rounded-lg p-3 mb-8 flex gap-4 items-stretch w-full sm:w-auto">
-            <input
-              type="number"
-              placeholder="Make a bet..."
-              className="appearance-none outline-none bg-transparent grow"
-            />
-            <select className="appearance-none bg-transparent outline-none">
-              <option value="ETH">ETH</option>
-              <option value="BTC">BTC</option>
-            </select>
-            <Button size="sm">Suggest a bet</Button>
-          </label>
-        </div>
+      <main className="max-w-7xl mx-auto py-8 px-4">
+        <form
+          className="flex w-full mb-8 gap-2 items-stretch justify-start"
+          onSubmit={handleAddSuggestedGame}
+        >
+          <Input
+            name="bet"
+            type="number"
+            placeholder="Make a bet in SOL"
+            className="appearance-none outline-none bg-transparent max-w-xs"
+          />
+          <Button type="submit">Suggest a game</Button>
+        </form>
         <h1 className="text-3xl font-bold mb-4">Active game suggestions</h1>
-        <SuggestedGamesBoard />
+        <SuggestedGamesBoard suggestedGames={suggestedGames} />
       </main>
     </div>
   );

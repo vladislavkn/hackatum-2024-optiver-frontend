@@ -17,7 +17,7 @@ const SuggestedGameCard: FC<SuggestedGameCardProps> = ({
 
   return (
     <Link to="/game">
-      <div className="bg-zinc-100 hover:bg-zinc-200 transition rounded-lg flex p-4 gap-4 cursor-pointer">
+      <div className="border hover:bg-zinc-200 transition rounded-lg flex p-4 gap-4 cursor-pointer">
         <Avatar className="w-12 h-12">
           <AvatarImage src={avatarUrl} />
           <AvatarFallback>{getInitials(name)}</AvatarFallback>
