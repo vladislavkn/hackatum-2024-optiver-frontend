@@ -3,10 +3,11 @@ import { FC } from "react";
 import { Button } from "./ui/button";
 import logo from "@/assets/logo.png";
 import { Link } from "react-router-dom";
-import useStore from "@/lib/store";
+
+import { useWallet } from "@solana/wallet-adapter-react";
 
 const Nav: FC = () => {
-  const { userName } = useStore();
+  const { publicKey } = useWallet();
 
   return (
     <nav className="flex px-4 py-3 justify-between items-center border-b flex-wrap gap-4">
@@ -15,7 +16,7 @@ const Nav: FC = () => {
           <img src={logo} alt="Chess chain" className="h-8" />
         </Link>
         <div className="sm:hidden grow"></div>
-        {userName && (
+        {publicKey && (
           <>
             <Button variant="link" asChild>
               <Link to="/userspace/watch">Watch</Link>
@@ -27,10 +28,12 @@ const Nav: FC = () => {
         )}
       </div>
 
-      {userName && (
+      {publicKey && (
         <div className="flex items-center gap-4 rounded-lg grow sm:grow-0">
           <Button variant="outline" asChild>
-            <Link to="/userspace/profile">👋 {userName}</Link>
+            <Link to="/userspace/profile">
+              👋 {publicKey.toString().slice(0, 12) + "..."}
+            </Link>
           </Button>
           <div className="grow"></div>
           <div>

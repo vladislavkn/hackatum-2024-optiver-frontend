@@ -1,18 +1,21 @@
 import Nav from "@/components/Nav";
 import { Button } from "@/components/ui/button";
-import useStore from "@/lib/store";
+import { useWallet } from "@solana/wallet-adapter-react";
+import { WalletDisconnectButton } from "@solana/wallet-adapter-react-ui";
 import { Coins, Share2 } from "lucide-react";
 import { FC } from "react";
 
 const Profile: FC = () => {
-  const { userName } = useStore();
+  const { publicKey } = useWallet();
 
   return (
     <div>
       <Nav />
-      <main className="max-w-xs mx-auto pt-20 pb-8">
+      <main className="max-w-xs mx-auto pt-20 pb-8 overflow-hidden">
         <p className="text-sm text-gray-500">Hi at Chess Chain,</p>
-        <h1 className="text-3xl font-bold mb-8">{userName}</h1>
+        <h1 className="text-3xl font-bold mb-8 break-all">
+          {publicKey!.toString()}
+        </h1>
 
         <div className="flex gap-4 justify-between mb-8">
           <div>
@@ -37,13 +40,14 @@ const Profile: FC = () => {
             Withdraw
           </Button>
         </div>
-        <div className="flex justify-between items-center gap-8">
+        <div className="flex justify-between items-center gap-8 mb-4">
           <p className="text-sm">Share your cool results</p>
           <Button size="sm" variant="secondary">
             <Share2 />
             Share
           </Button>
         </div>
+        <WalletDisconnectButton />
       </main>
     </div>
   );

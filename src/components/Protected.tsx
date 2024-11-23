@@ -1,10 +1,10 @@
-import useStore from "@/lib/store";
+import { useWallet } from "@solana/wallet-adapter-react";
 import { FC } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
 const Protected: FC = () => {
-  const { userName } = useStore();
-  return userName ? <Outlet /> : <Navigate to="/login" />;
+  const { publicKey } = useWallet();
+  return publicKey ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default Protected;

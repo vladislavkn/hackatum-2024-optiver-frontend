@@ -1,22 +1,23 @@
 import Nav from "@/components/Nav";
 import SuggestedGamesBoard from "@/components/SuggestedGamesBoard";
 import getSuggestedGame from "@/lib/api";
-import useStore from "@/lib/store";
+
 import { SuggestedGame } from "@/types";
+import { useWallet } from "@solana/wallet-adapter-react";
 import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const initialState = Array.from({ length: 15 }, () => getSuggestedGame());
 
 const WatchPage: FC = () => {
-  const { userName } = useStore();
+  const { publicKey } = useWallet();
   const navigate = useNavigate();
 
   const [suggestedGames, setSuggestedGames] = useState<SuggestedGame[]>(
-    userName ? initialState : []
+    publicKey ? initialState : []
   );
   useEffect(() => {
-    if (!userName) return;
+    if (!publicKey) return;
     let timeout: ReturnType<typeof setTimeout>;
 
     const updateGames = () => {
