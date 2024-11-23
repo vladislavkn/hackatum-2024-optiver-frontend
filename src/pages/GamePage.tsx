@@ -6,7 +6,7 @@ const GamePage: FC = () => {
   return (
     <div>
       <Nav />
-      <main className="max-w-6xl mx-auto py-8">
+      <main className="max-w-6xl mx-auto py-8 px-4">
         <ChessGame onGameOver={alert} />
       </main>
     </div>

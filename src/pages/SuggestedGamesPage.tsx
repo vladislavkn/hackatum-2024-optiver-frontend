@@ -9,13 +9,13 @@ const SuggestedGamesPage: FC = () => {
     <div>
       <Nav />
 
-      <main className="max-w-6xl mx-auto py-8">
-        <div className="flex">
-          <label className="bg-zinc-100 rounded-lg p-3 mb-8 flex gap-4 items-stretch">
+      <main className="max-w-6xl mx-auto py-8 px-4">
+        <div className="flex w-full sm:w-auto">
+          <label className="bg-zinc-100 rounded-lg p-3 mb-8 flex gap-4 items-stretch w-full sm:w-auto">
             <input
               type="number"
               placeholder="Make a bet..."
-              className="appearance-none outline-none bg-transparent"
+              className="appearance-none outline-none bg-transparent grow"
             />
             <select className="appearance-none bg-transparent outline-none">
               <option value="ETH">ETH</option>
