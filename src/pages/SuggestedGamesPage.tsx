@@ -79,6 +79,7 @@ const SuggestedGamesPage: FC = () => {
             min={0}
           />
           <p className="text-xl leading-9 mr-4 font-mono">SOL</p>
+          <div className="grow sm:hidden"></div>
           <Button type="submit">Suggest a game</Button>
         </form>
         <h1 className="text-3xl font-bold mb-4">Active game suggestions</h1>

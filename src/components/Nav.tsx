@@ -9,11 +9,12 @@ const Nav: FC = () => {
   const { userName } = useStore();
 
   return (
-    <nav className="flex px-4 py-2 justify-between items-center border-b">
-      <div className="flex items-center gap-2">
+    <nav className="flex px-4 py-3 justify-between items-center border-b flex-wrap gap-4">
+      <div className="flex items-center gap-2 grow">
         <Link to="/userspace/play">
           <img src={logo} alt="Chess chain" className="h-8" />
         </Link>
+        <div className="sm:hidden grow"></div>
         {userName && (
           <>
             <Button variant="link" asChild>
@@ -27,20 +28,21 @@ const Nav: FC = () => {
       </div>
 
       {userName && (
-        <div className="flex items-center gap-4 rounded-lg py-2 px-3">
-          <Button variant="link" asChild>
+        <div className="flex items-center gap-4 rounded-lg grow sm:grow-0">
+          <Button variant="outline" asChild>
             <Link to="/userspace/profile">👋 {userName}</Link>
           </Button>
+          <div className="grow"></div>
           <div>
-            <p className="text-xs">Your place</p>
+            <p className="text-xs hidden sm:block">Your place</p>
             <p className="text-sm font-bold text-yellow-500">57th</p>
           </div>
           <div>
-            <p className="text-xs">Your results</p>
+            <p className="text-xs hidden sm:block">Your results</p>
             <p className="text-sm font-bold text-green-500">+0.02 SOL</p>
           </div>
           <div>
-            <p className="text-xs">Your winrate</p>
+            <p className="text-xs hidden sm:block">Your winrate</p>
             <p className="text-sm font-bold text-green-500">65%</p>
           </div>
         </div>

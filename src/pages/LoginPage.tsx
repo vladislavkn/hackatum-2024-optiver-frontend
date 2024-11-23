@@ -31,7 +31,7 @@ const LoginPage: FC = () => {
     <div className="w-screen h-screen flex flex-col">
       <Nav />
       <div className="flex flex-col grow items-center justify-center p-4">
-        <Card className="max-w-xs">
+        <Card className="max-w-sm">
           <CardHeader>
             <CardTitle>Login to continue</CardTitle>
             <CardDescription>
