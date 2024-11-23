@@ -2,7 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { FC } from "react";
 import CountUpAnimation from "./ui/CountUpAnimation";
 import { SuggestedGame } from "@/types";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export type SuggestedGameCardProps = {
   suggestedGame: SuggestedGame;
