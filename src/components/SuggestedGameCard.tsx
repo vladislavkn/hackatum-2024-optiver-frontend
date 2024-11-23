@@ -32,7 +32,7 @@ const SuggestedGameCard: FC<SuggestedGameCardProps> = ({
   return (
     <div
       onClick={() => onClick?.(suggestedGame)}
-      className="border hover:bg-zinc-200 transition rounded-lg flex p-4 gap-4 cursor-pointer"
+      className="border hover:bg-zinc-100 transition rounded-lg flex p-4 gap-4 cursor-pointer"
     >
       <Avatar className="w-12 h-12">
         <AvatarImage src={avatarUrl} />

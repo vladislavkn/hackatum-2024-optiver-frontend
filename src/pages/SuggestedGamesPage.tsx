@@ -66,17 +66,19 @@ const SuggestedGamesPage: FC = () => {
       <Nav />
       <main className="max-w-7xl mx-auto py-8 px-4">
         <form
-          className="flex w-full mb-8 gap-2 items-stretch justify-start"
+          className="flex w-full mb-8  items-stretch justify-start"
           onSubmit={handleAddSuggestedGame}
         >
+          <p className="font-mono leading-9 mr-1">0.</p>
           <Input
             name="bet"
             type="number"
-            placeholder="Make a bet in SOL"
-            className="appearance-none outline-none bg-transparent max-w-xs"
+            placeholder="Your bet"
+            className="appearance-none outline-none bg-transparent max-w-32 font-mono mr-2"
             max={99}
             min={0}
           />
+          <p className="text-xl leading-9 mr-4 font-mono">SOL</p>
           <Button type="submit">Suggest a game</Button>
         </form>
         <h1 className="text-3xl font-bold mb-4">Active game suggestions</h1>
