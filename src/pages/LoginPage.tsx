@@ -4,21 +4,28 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import useStore from "@/lib/store";
 import { ArrowRight } from "lucide-react";
 import { FC, FormEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const LoginPage: FC = () => {
-  const navigate = useNavigate();
-  const handleSubmit = (e: FormEvent) => {
+  const { login, userName } = useStore();
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    navigate("/");
+    const formData = new FormData(e.target as HTMLFormElement);
+    const userName = formData.get("userName") as string;
+    login(userName);
   };
+
+  if (userName) {
+    return <Navigate to="/userspace/play" />;
+  }
 
   return (
     <div className="w-screen h-screen flex flex-col">
@@ -28,7 +35,7 @@ const LoginPage: FC = () => {
           <CardHeader>
             <CardTitle>Login to continue</CardTitle>
             <CardDescription>
-              If you don't have an account at Solana chess yet, it will be
+              If you don't have an account at Chess chain yet, it will be
               created
             </CardDescription>
           </CardHeader>
@@ -37,7 +44,7 @@ const LoginPage: FC = () => {
               onSubmit={handleSubmit}
               className="flex flex-col gap-3 items-stretch"
             >
-              <Input placeholder="Your name in Solana Chess" />
+              <Input name="userName" placeholder="Your name in Chess Chain" />
               <Button size="lg" type="submit">
                 Continue in with Google <ArrowRight />
               </Button>

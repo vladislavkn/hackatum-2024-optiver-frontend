@@ -5,10 +5,14 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export type SuggestedGamesBoardProps = {
   suggestedGames: SuggestedGame[];
+  onGameClick: (game: SuggestedGame) => void;
+  displayViewers?: boolean;
 };
 
 const SuggestedGamesBoard: FC<SuggestedGamesBoardProps> = ({
   suggestedGames,
+  onGameClick,
+  displayViewers,
 }) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -21,7 +25,12 @@ const SuggestedGamesBoard: FC<SuggestedGamesBoardProps> = ({
             exit={{ opacity: 0, y: -50 }}
             transition={{ duration: 0.3 }}
           >
-            <SuggestedGameCard suggestedGame={game} key={game.id} />
+            <SuggestedGameCard
+              onClick={onGameClick}
+              suggestedGame={game}
+              key={game.id}
+              displayViewers={displayViewers}
+            />
           </motion.div>
         ))}
       </AnimatePresence>

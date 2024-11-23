@@ -1,3 +1,4 @@
+import { WatcherCardProps } from "@/components/WatcherCard";
 import { SuggestedGame } from "@/types";
 
 const firstNames = [
@@ -22,7 +23,6 @@ const lastNames = [
   "Davis",
   "Wilson",
 ];
-const currencies = ["ETH", "BTC", "DOGE"];
 const avatars = [
   "https://api.dicebear.com/9.x/pixel-art/svg",
   "https://api.dicebear.com/9.x/micah/svg",
@@ -40,8 +40,16 @@ const getSuggestedGame = (): SuggestedGame => ({
     Math.random() > 0.1
       ? randomChoice(avatars) + "?seed=" + counter++
       : undefined,
-  currency: randomChoice(currencies),
+  currency: "SOL",
   betAmount: Math.floor(Math.random() * 100),
 });
+
+export const createWatcher = (): WatcherCardProps => ({
+  name: randomChoice(firstNames) + " " + randomChoice(lastNames),
+  bet: Math.floor(Math.random() * 100) / 100,
+});
+
+export const getCompetitor = () =>
+  randomChoice(firstNames) + " " + randomChoice(lastNames);
 
 export default getSuggestedGame;
