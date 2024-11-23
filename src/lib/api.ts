@@ -23,6 +23,11 @@ const lastNames = [
   "Wilson",
 ];
 const currencies = ["ETH", "BTC", "DOGE"];
+const avatars = [
+  "https://api.dicebear.com/9.x/pixel-art/svg",
+  "https://api.dicebear.com/9.x/micah/svg",
+  "https://api.dicebear.com/9.x/lorelei/svg",
+];
 
 export const randomChoice = <T>(array: T[]) =>
   array[Math.floor(Math.random() * array.length)];
@@ -33,7 +38,7 @@ const getSuggestedGame = (): SuggestedGame => ({
   name: randomChoice(firstNames) + " " + randomChoice(lastNames),
   avatarUrl:
     Math.random() > 0.1
-      ? "https://api.dicebear.com/9.x/micah/svg?seed=" + counter++
+      ? randomChoice(avatars) + "?seed=" + counter++
       : undefined,
   currency: randomChoice(currencies),
   betAmount: Math.floor(Math.random() * 100),
