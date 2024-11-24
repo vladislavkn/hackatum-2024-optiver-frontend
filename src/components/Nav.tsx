@@ -1,7 +1,7 @@
 import { FC } from "react";
 
 import { Button } from "./ui/button";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo.jpeg";
 import { Link } from "react-router-dom";
 import useUser from "@/lib/useUser";
 
