@@ -1,12 +1,15 @@
 import Nav from "@/components/Nav";
 import { Button } from "@/components/ui/button";
-import { useWallet } from "@solana/wallet-adapter-react";
-import { WalletDisconnectButton } from "@solana/wallet-adapter-react-ui";
+import useUser from "@/lib/useUser";
+import {
+  WalletDisconnectButton,
+  WalletMultiButton,
+} from "@solana/wallet-adapter-react-ui";
 import { Coins, Share2 } from "lucide-react";
 import { FC } from "react";
 
 const Profile: FC = () => {
-  const { publicKey } = useWallet();
+  const userName = useUser();
 
   return (
     <div>
@@ -14,17 +17,17 @@ const Profile: FC = () => {
       <main className="max-w-xs mx-auto pt-20 pb-8 overflow-hidden">
         <p className="text-sm text-gray-500">Hi at Chess Chain,</p>
         <h1 className="text-3xl font-bold mb-8 break-all">
-          {publicKey!.toString()}
+          {userName!.toString()}
         </h1>
 
         <div className="flex gap-4 justify-between mb-8">
           <div>
             <p className="text-sm">Your place</p>
-            <p className="text-lg font-bold text-yellow-500">57th</p>
+            <p className="text-lg font-bold text-yellow-500">101th</p>
           </div>
           <div>
             <p className="text-sm">Your results</p>
-            <p className="text-lg font-bold text-green-500">+0.02 SOL</p>
+            <p className="text-lg font-bold text-green-500">+0.01 SOL</p>
           </div>
           <div>
             <p className="text-sm">Your winrate</p>
@@ -47,7 +50,14 @@ const Profile: FC = () => {
             Share
           </Button>
         </div>
-        <WalletDisconnectButton />
+        {userName === "Guest" ? (
+          <div className="flex justify-between items-center gap-8 ">
+            <p className="text-sm">Connect wallet</p>
+            <WalletMultiButton />
+          </div>
+        ) : (
+          <WalletDisconnectButton />
+        )}
       </main>
     </div>
   );

@@ -3,22 +3,22 @@ import SuggestedGamesBoard from "@/components/SuggestedGamesBoard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import getSuggestedGame from "@/lib/api";
+import useUser from "@/lib/useUser";
 import { SuggestedGame } from "@/types";
-import { useWallet } from "@solana/wallet-adapter-react";
 import { FC, FormEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const initialState = Array.from({ length: 15 }, () => getSuggestedGame());
 
 const SuggestedGamesPage: FC = () => {
-  const { publicKey } = useWallet();
+  const userName = useUser();
   const navigate = useNavigate();
 
   const [suggestedGames, setSuggestedGames] = useState<SuggestedGame[]>(
-    publicKey ? initialState : []
+    userName ? initialState : []
   );
   useEffect(() => {
-    if (!publicKey) return;
+    if (!userName) return;
     let timeout: ReturnType<typeof setTimeout>;
 
     const updateGames = () => {
@@ -54,7 +54,7 @@ const SuggestedGamesPage: FC = () => {
       return [
         {
           betAmount: Number(bet),
-          name: publicKey!.toString(),
+          name: userName!.toString(),
           id: Date.now(),
           currency: "SOL",
         },
